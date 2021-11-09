@@ -1,0 +1,603 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Desafio Ploomes",
+        "description": "Essa é uma API para gerenciamento de catálogos de filmes e séris dos estudios Marvel, Ghibli e Pixar.",
+        "termsOfService": "http://localhost:7070/terms/",
+        "contact": {
+            "email": "lizzbeth.lizz.diaz@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:7070/",
+            "description": "Favorite Movies API"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Studio",
+            "description": "Manipulation of Studio Routes"
+        },
+        {
+            "name": "Title",
+            "description": "Manipulation of Title Routes"
+        }
+    ],
+    "paths": {
+        "/studio/create": {
+            "post": {
+                "tags": [
+                    "Studio"
+                ],
+                "summary": "Create Studio",
+                "description": "Registration of Studios",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Studio"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "404": {
+                        "description": "ERROR",
+                        "content": {}
+                    },
+                    "200": {
+                        "description": "Studio created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "objetc",
+                                    "$ref": "#/components/schemas/Studio"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/studio/all": {
+            "get": {
+                "tags": [
+                    "Studio"
+                ],
+                "summary": "List all Studio",
+                "description": "List All Registered Studios",
+                "parameters": [
+                    {
+                        "name": "Studio",
+                        "description": "List All Registered Studios",
+                        "requestBody": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/Studio"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "operaction performed sucessfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Studio"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/studio/{Id}": {
+            "get": {
+                "tags": [
+                    "Studio"
+                ],
+                "summary": "Search by ID",
+                "description": "Returns Studio by ID",
+                "parameters": [
+                    {
+                        "name": "Studio Id",
+                        "in": "path",
+                        "description": "Studio ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "operaction performed sucessfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Studio"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Studio"
+                ],
+                "summary": "Updates any part (separately) of a registared Studio",
+                "requestBody": {
+                    "description": "Update of Studio",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "atributo que será atualizado": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "404": {
+                        "description": "Error",
+                        "content": {}
+                    },
+                    "200": {
+                        "description": "OK. Update performed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Studio"
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            },
+            "delete": {
+                "tags": [
+                    "Studio"
+                ],
+                "summary": "Delect an Studio",
+                "description": "Delects a specific studio by ID",
+                "parameters": [
+                    {
+                        "name": "Studio ID",
+                        "in": "path",
+                        "required": true,
+                        "description": "Studio ID to delete"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Studio deleted successfully",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Studio cannot be found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/title/create": {
+            "post": {
+                "tags": [
+                    "Title"
+                ],
+                "summary": "Create a Title Collection",
+                "description": "Create Title ",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Title"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "404": {
+                        "description": "ERROR",
+                        "content": {}
+                    },
+                    "200": {
+                        "description": "Title created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "objetc",
+                                    "$ref": "#/components/schemas/Title"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/title/{id}/like": {
+            "post": {
+                "tags": [
+                    "Title"
+                ],
+                "summary": "Like a specific Title",
+                "description": "Give a like",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "like":{
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK. ",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/title/{id}/dislike": {
+            "post": {
+                "tags": [
+                    "Title"
+                ],
+                "summary": "Remove a like from a specific Title",
+                "description": "Remove a like",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "dislike":{
+                                        "type": "number",
+                                        "description": "Number has to be negative"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK. ",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "ERROR",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/title/all": {
+            "get": {
+                "tags": [
+                    "Title"
+                ],
+                "summary": "List all Title",
+                "description": "List All Registered Titles",
+                "parameters": [
+                    {
+                        "name": "Titles",
+                        "description": "List All Registered Titles",
+                        "requestBody": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Title"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation performed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Title"
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                
+            }
+        },
+        "/title/marvel": {
+            "get": {
+                "tags": [
+                    "Title"
+                ],
+                "summary": "Title by Marvel",
+                "description": "Returns Title by Marvel",
+                "parameters": [
+                    {
+                        "name": "title marvel",
+                        "in": "query",
+                        "description": "Title of the Marvel",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "operaction performed sucessfully",
+                        "content": {
+                            "application/jsn": {
+                                "schema": {
+                                    "type": "objetc",
+                                    "$ref": "#/components/schemas/Title"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/title/ghibli": {
+            "get": {
+                "tags": [
+                    "Title"
+                ],
+                "summary": "Title by Ghibli",
+                "description": "Returns Title by Ghibli",
+                "parameters": [
+                    {
+                        "name": "title ghibli",
+                        "in": "query",
+                        "description": "Title of the Ghibli",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "operaction performed sucessfully",
+                        "content": {
+                            "application/jsn": {
+                                "schema": {
+                                    "type": "objetc",
+                                    "$ref": "#/components/schemas/Title"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/title/pixar": {
+            "get": {
+                "tags": [
+                    "Title"
+                ],
+                "summary": "Title by Pixar",
+                "description": "Returns Title by Pixar",
+                "parameters": [
+                    {
+                        "name": "title pixar",
+                        "in": "query",
+                        "description": "Title of the Pixar",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "operaction performed sucessfully",
+                        "content": {
+                            "application/jsn": {
+                                "schema": {
+                                    "type": "objetc",
+                                    "$ref": "#/components/schemas/Title"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/title/{id}": {
+            "get": {
+                "tags": [
+                    "Title"
+                ],
+                "summary": "Search by ID",
+                "description": "Returns Title by ID",
+                "parameters": [
+                    {
+                        "name": "Title Id",
+                        "in": "path",
+                        "description": "Title ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation performed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Title"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Title"
+                ],
+                "summary": "Update os a registered Title data",
+                "requestBody": {
+                    "description": "Upadate the Title entity",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Title"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "404": {
+                        "description": "Error",
+                        "content": {}
+                    },
+                    "200": {
+                        "description": "OK. Titles updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Title"
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            },
+            "patch": {
+                "tags": [
+                    "Title"
+                ],
+                "summary": "Updates any part (separately) of a registared Title",
+                "requestBody": {
+                    "description": "Update Title information",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "atributo que será atualizado": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "404": {
+                        "description": "Error",
+                        "content": {}
+                    },
+                    "200": {
+                        "description": "OK. Update performed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Title"
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            },
+            "delete": {
+                "tags": [
+                    "Title"
+                ],
+                "summary": "Delect a Title",
+                "description": "Delects a specific Title by ID",
+                "parameters": [
+                    {
+                        "name": "Title Id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Title ID to delete"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Title deleted successfully",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "ERROR (Id cannot be found)",
+                        "content": {}
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Studio": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "criadoEm": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Title": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "like": {
+                        "type": "number"
+                    },
+                    "nome": {
+                        "type": "number"
+                    },
+                    "genero": {
+                        "type": "string"
+                    },
+                    "descricao": {
+                        "type": "string"
+                    },
+                    "estudio": {
+                        "type": "object"
+                    },
+                    "criadoEm": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
